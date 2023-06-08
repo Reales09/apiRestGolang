@@ -28,7 +28,9 @@ func Connect() {
 
 // Cerrar la conexión
 func Close() {
+	fmt.Println("Conexion cerrada exitosa")
 	db.Close()
+
 }
 
 //Verificar la conexión

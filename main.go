@@ -1,6 +1,7 @@
 package main
 
 import (
+	"apirest/db"
 	"apirest/handlers"
 	"log"
 	"net/http"
@@ -9,6 +10,12 @@ import (
 )
 
 func main() {
+	db.Connect()
+
+	// db.CreateTable(models.UserSchema, "users")
+
+	// user := models.CreaUser("Myles", "123456", "Adriana@gmail.com")
+	// user.Save()
 
 	mux := mux.NewRouter()
 
@@ -21,4 +28,6 @@ func main() {
 	mux.HandleFunc("/api/user/{id:[0-9]+}", handlers.DeleteUser).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":3000", mux))
+
+	defer db.Close()
 }
