@@ -1,2 +1,2 @@
 # apirest/handlers
-handlers\handlers.go:30:2: userId declared and not used
+handlers\handlers.go:58:2: userId declared and not used
