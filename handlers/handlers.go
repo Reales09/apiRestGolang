@@ -3,24 +3,38 @@ package handlers
 import (
 	"apirest/db"
 	"apirest/models"
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
-	"gopkg.in/yaml.v3"
+	"github.com/gorilla/mux"
 )
 
 func GetUsers(rw http.ResponseWriter, r *http.Request) {
-	// rw.Header().Set("Content-Type", "application/json")
+	rw.Header().Set("Content-Type", "application/json")
 	// rw.Header().Set("Content-Type", "test/xml")
 	db.Connect()
 	users := models.ListUsers()
 	db.Close()
-	output, _ := yaml.Marshal(users)
+	output, _ := json.Marshal(users)
 	fmt.Fprintln(rw, string(output))
 }
 
 func GetUser(rw http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(rw, "Obtiene un usuario")
+	rw.Header().Set("Content-Type", "application/json")
+	// rw.Header().Set("Content-Type", "test/xml")
+
+	//Obtener ID
+	vars := mux.Vars(r)
+	userId, _ := strconv.Atoi(vars["id"])
+
+	db.Connect()
+	user := models.GetUser(userId)
+	db.Close()
+	output, _ := json.Marshal(user)
+	fmt.Fprintln(rw, string(output))
+
 }
 
 func CreateUser(rw http.ResponseWriter, r *http.Request) {
