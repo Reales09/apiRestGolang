@@ -3,18 +3,19 @@ package handlers
 import (
 	"apirest/db"
 	"apirest/models"
-	"encoding/xml"
 	"fmt"
 	"net/http"
+
+	"gopkg.in/yaml.v3"
 )
 
 func GetUsers(rw http.ResponseWriter, r *http.Request) {
 	// rw.Header().Set("Content-Type", "application/json")
-	rw.Header().Set("Content-Type", "test/xml")
+	// rw.Header().Set("Content-Type", "test/xml")
 	db.Connect()
 	users := models.ListUsers()
 	db.Close()
-	output, _ := xml.Marshal(users)
+	output, _ := yaml.Marshal(users)
 	fmt.Fprintln(rw, string(output))
 }
 
