@@ -14,7 +14,7 @@ func main() {
 
 	// db.CreateTable(models.UserSchema, "users")
 
-	// user := models.CreaUser("Myles", "123456", "Adriana@gmail.com")
+	// user := models.CreaUser("Clarence", "123456", "Realis@gmail.com")
 	// user.Save()
 
 	mux := mux.NewRouter()
