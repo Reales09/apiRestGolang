@@ -15,7 +15,7 @@ func GetUsers(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	// rw.Header().Set("Content-Type", "test/xml")
 	db.Connect()
-	users := models.ListUsers()
+	users, _ := models.ListUsers()
 	db.Close()
 	output, _ := json.Marshal(users)
 	fmt.Fprintln(rw, string(output))
@@ -30,7 +30,7 @@ func GetUser(rw http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(vars["id"])
 
 	db.Connect()
-	user := models.GetUser(userId)
+	user, _ := models.GetUser(userId)
 	db.Close()
 	output, _ := json.Marshal(user)
 	fmt.Fprintln(rw, string(output))
@@ -68,7 +68,7 @@ func DeleteUser(rw http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(vars["id"])
 
 	db.Connect()
-	user := models.GetUser(userId)
+	user, _ := models.GetUser(userId)
 	user.Delete()
 	db.Close()
 	output, _ := json.Marshal(user)
